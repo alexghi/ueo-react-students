@@ -1,0 +1,65 @@
+.clockFace{
+    top: 8rem;
+    position: relative;
+    margin: auto;
+    width: 20vw;
+    height: 20vw;
+    border: 3px solid black;
+    border-radius: 50%;
+}
+
+.digits{
+    font-size: large;
+}
+.top{
+    position: absolute;
+    left: 46%;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 0px;
+    left: 49%;
+}
+
+.right{
+    position: absolute;
+    bottom: 46%;
+    left: 93%;
+}
+.left{
+    position: absolute;
+    bottom: 46%;
+    left: 3%;
+}
+
+#hour, #minute, #second {
+    position: absolute;
+    background: black;
+    border-radius: 10px;
+    transform-origin: bottom;
+}
+
+#hour{
+    width: 2%;
+    height: 25%;
+    top: 25%;
+    left: 48.85%;
+    opacity: 0.8;
+}
+
+#minute {
+    width: 1.6%;
+    height: 30%;
+    top: 19%;
+    left: 48.9%;
+    opacity: 0.8;
+}
+ 
+#second {
+    width: 1%;
+    height: 40%;
+    top: 9%;
+    left: 49.25%;
+    opacity: 0.8;
+}
