@@ -10,7 +10,7 @@ let keepsHisWord;
 keepsHisWord = true;
 
 const getAPOD = new Promise( function(resolve, reject) {
-  return fetch(`https://api.nasa.gov/planetary/apod?api_key=AaMpAKQyQTDmPP3yC1RoArvqG2MjgukNtir4D8Y6`)
+  return fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY`)
   .then((response) => {
     return response.json()
   })
