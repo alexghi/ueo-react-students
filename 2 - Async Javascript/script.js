@@ -7,27 +7,68 @@
 // }
 
 let keepsHisWord;
-keepsHisWord = false;
+keepsHisWord = true;
 
-// var promise1 = new Promise(function (resolve, reject) {
-//   if (keepsHisWord) {
-//     resolve("this man keeps his word");
-//   } else {
-//     reject("this man doesn't keep his word");
-//   }
-// });
+const getAPOD = new Promise( function(resolve, reject) {
+  return fetch(`https://api.nasa.gov/planetary/apod?api_key=AaMpAKQyQTDmPP3yC1RoArvqG2MjgukNtir4D8Y6`)
+  .then((response) => {
+    return response.json()
+  })
+  .then((data) => {
+    document.getElementById('apod').innerHTML = `<img height="500px" src=${data.url}> <div>${data.title}</div>`
+    console.log(data)
+  })
+})
 
-// console.log(promise1);
+// getAPOD()
+
+
+// var myPromise = new Promise( function(resolve, reject) {
+//     if( keepsHisWord ) {
+//       resolve({
+//         message: 'This man keeps his word',
+//         code: 200
+//       })
+//     }
+//     else {
+//       reject({
+//         message: "This man is a liar",
+//         code: 404
+//       })
+//     }
+
+// })
+
+// myPromise
+//   .then(
+//     (m) => {
+//       // console.log('1', m)
+//       return {something: 'something'}
+//     },
+//   )
+//   .then((a) => {
+//     // console.log('2', a)
+//     return {altceva: 'altceva'}
+    
+//   })
+//   .then((a)=> {
+//     // console.log('3', a)
+//   })
+//   .catch((err) => {
+//     // console.log(err)
+//   })
+
+// console.log(myPromise)
+
 
 // let promise2 = new Promise(function (resolve, reject) {
 //   setTimeout(function () {
-//     reject(2);
-//     // resolve({
-//     //   message: "This man likes to keep his word",
-//     //   code: 200,
-//     //   color: "green",
-//     // });
-//   }, 10 * 1000);
+//     resolve({
+//       message: "This man likes to keep his word",
+//       code: 200,
+//       color: "green",
+//     });
+//   }, 5000);
 // })
 //   .then((response) => {
 //     console.log("hooray you've been accepted", response);
