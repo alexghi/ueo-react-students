@@ -62,4 +62,9 @@
   /* display: inline-block; */
   /* width: auto; */
 }
+.wraper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 

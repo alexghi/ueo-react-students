@@ -153,17 +153,17 @@ const DayCard = (props) => {
 function App() {
   return (
     <>
-      <div>
+      <div className='wraper'>
         {todos.map((day, index) => {
           return <>
-            <DayCard
-              key={index}
-              day={day.day}
-              shopingList={day.shopingList}
-              breakfast={day.breakfast}
-              lunch={day.lunch}
-              dinner={day.dinner}
-            />
+              <DayCard
+                key={index}
+                day={day.day}
+                shopingList={day.shopingList}
+                breakfast={day.breakfast}
+                lunch={day.lunch}
+                dinner={day.dinner}
+              />
           </>
         })}
       </div>
