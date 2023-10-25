@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 
 const todos = [
@@ -83,7 +82,7 @@ const todos = [
 
 const Day = (props) => {
   const { day } = props
-  return <h3>{day}</h3>
+  return <h1>{day}</h1>
 }
 
 const ShopingList = (props) => {
