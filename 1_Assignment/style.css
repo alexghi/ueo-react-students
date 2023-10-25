@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.clock {
+    width: 360px;
+    height: 360px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    position: relative;
+}
+
+.center {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hour-hand, .minute-hand, .second-hand {
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background-color: #333;
+    top: 50%;
+    transform-origin: 100%;
+}
+
+.hour-hand {
+    transform: rotate(0deg);
+}
+
+.minute-hand {
+    transform: rotate(0deg);
+}
+
+.second-hand {
+    transform: rotate(0deg);
+}
+/* ... alte stiluri existente ... */
+
+/* Marcajele pentru ore */
+.mark9 {
+    position: absolute;
+    transform-origin: center;
+    width: 22px;
+    height: 1px;
+    background-color: #333;
+    top: 180px; /* Ajustăm distanța de la marginea ceasului */
+    left:  -20px; /* Centrăm marcajul pe mijlocul ceasului */
+  
+}
+
+.mark12 {
+    position: absolute;
+    transform-origin: center;
+    width: 22px;
+    height: 1px;
+    background-color: #333;
+    top: -20px; /* Ajustăm distanța de la marginea ceasului */
+    left:  180px; /* Centrăm marcajul pe mijlocul ceasului */
+ 
+}
+.mark3 {
+    position: absolute;
+    transform-origin: center;
+    width: 22px;
+    height: 1px;
+    background-color: #333;
+    top: 180px; /* Ajustăm distanța de la marginea ceasului */
+    left:  365px; /* Centrăm marcajul pe mijlocul ceasului */
+    
+}
+.mark6 {
+    position: absolute;
+    transform-origin: center;
+    width: 22px;
+    height: 1px;
+    background-color: #333;
+    top: 365px; /* Ajustăm distanța de la marginea ceasului */
+    left:  180px; /* Centrăm marcajul pe mijlocul ceasului */
+    
+}
+
+
+
