@@ -18,7 +18,7 @@ const CarPhoto = (props) => {
 
 const Title = (props) => {
   const { title } = props
-  return <h2>{title}</h2>
+  return <h2 id={title}>{title}</h2>
 }
 
 const Description = (props) => {
