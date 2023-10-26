@@ -90,6 +90,7 @@ const ShopingList = (props) => {
   return <>
     <div className="shopingList">
       <br />
+      <ul></ul>
       {shopingList.map((meniu) => {
         return <>
           <b>for breakfast we need: </b> {meniu.breakfast.map((element) => {
