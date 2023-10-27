@@ -1,22 +1,35 @@
-import { useState } from 'react'
+import { useState, useCallback} from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+
+  const onInputChangeFirstName = useCallback((event) => {
+    setFirstName(event.target.value)
+  }, [setFirstName])
+
+  const onInputChangeLastName = useCallback((event) => {
+    setLastName(event.target.value)
+  }, [setLastName])
+
+  const sayHi = () => {
+    alert('Hi ' + lastName + ' ' + firstName)
+  }
+
 
   return (
     <>
       <div className="card">
         <div>
-          <input type="text" />
-          <input type="text" />
+          <div>
+            <input value={lastName} onChange={onInputChangeLastName} />
+          </div>
+          <div>
+            <input value={firstName} onChange={onInputChangeFirstName} />
+          </div>
         </div>
-
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={sayHi}>Say Hi!</button>
       </div>
     </>
   )
