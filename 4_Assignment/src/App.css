@@ -40,3 +40,30 @@
 .read-the-docs {
   color: #888;
 }
+
+.bodyex3 {
+
+  flex-direction: column;
+  height: 20px;
+
+}
+
+.buttonex3 {
+  margin: 10px;
+}
+.h1{
+  margin-top: 0;
+}
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.top-text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Stiluri pentru butoanele și alte elemente */
