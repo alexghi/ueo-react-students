@@ -1,0 +1,42 @@
+#clock {
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 50%;
+    position: relative;
+    background-color: bisque;
+  }
+  
+  .hand {
+    position: absolute;
+    height: 50%;
+    width: 2px;
+    background: black;
+    left: 50%;
+    transform-origin: 50% 100%;
+    transition: transform 1s cubic-bezier(0.4, 2.5, 0.4, 2.5);
+  }
+  
+  #hour-hand {
+    height: 35%;
+    width: 4px;
+  }
+  
+  .tick {
+    position: absolute;
+    width: 2px;
+    height: 5%;
+    background: black;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tick.minute {
+    height: 2%;
+  }
+  
+  .number {
+    position: absolute;
+    font-size: 16px;
+  }
+  
