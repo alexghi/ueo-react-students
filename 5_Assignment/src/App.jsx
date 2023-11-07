@@ -1,35 +1,91 @@
-import { useState } from 'react'
+import Card from 'react-bootstrap/Card';
+import { useCallback, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+// eslint-disable-next-line react/prop-types
+const ImageCard = ({ date, explanation,  title, url }) => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={url} />
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>
+          {explanation}
+        </Card.Text>
+        <Card.Footer>{date}</Card.Footer>
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default App
+const Loading = () => {
+  return <div>
+    loading
+  </div>
+}
+
+function App() {
+  const [data, setData] = useState(null)
+  const [loading ,setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [query, setQuery] = useState('');
+
+  // on demand
+  const getPictures = useCallback(() => {
+    setLoading(true)
+    fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=29daa14d192f4c61a3ab19da8b490ad1`)
+      .then(response => response.json())
+      .then(resultAsJson => {
+        console.log(resultAsJson)
+        setData(resultAsJson)
+      })
+      .catch(err => {
+        setError(err)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+      ;
+  }, [query, setData, setLoading, setError])
+
+  //  la primul mount
+  // useEffect(() => {
+  //   fetch("https://api.nasa.gov/planetary/apod?api_key=AICI_PUNETI_KEY_UL_VOSTRU&start_date=2023-10-10")
+  //     .then(response => response.json())
+  //     .then(resultAsJson => {
+  //       setData(resultAsJson)
+  //     })
+  //     .catch(err => {
+  //       setError(err)
+  //     });
+  // }, [])
+
+  return (
+    <div>
+       <input
+        type="text"
+        placeholder="Enter a search term"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <button onClick={getPictures}>Get pictures</button>
+      {loading ? <Loading /> : null}
+      {data && data.articles && data.articles.length > 0
+        ? data.articles.map((article, index) => (
+            <ImageCard
+              key={index}
+              date={article.publishedAt}
+              explanation={article.description}
+              title={article.title}
+              url={article.urlToImage}
+            />
+          ))
+        : null}
+    </div>
+  );
+}
+
+export default App;
+ 
