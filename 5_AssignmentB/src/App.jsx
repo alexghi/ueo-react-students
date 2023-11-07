@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect, useCallback } from 'react';
+import Card from 'react-bootstrap/Card';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const ImageCard = ({ date, explanation, title, url }) => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={url} />
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{explanation}</Card.Text>
+        <Card.Footer>{date}</Card.Footer>
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default App
+const Loading = () => {
+  return <div>Loading...</div>
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]); // Data curentă
+
+  const getPictureOfTheDay = useCallback((specifiedDate) => {
+    setLoading(true);
+   
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=Mo7YnS8DzuQmPLrgV9jdyF5zYrb0QMschzJhpb9N&date=${specifiedDate}`)
+      .then(response => response.json())
+      .then(resultAsJson => {
+        setData(resultAsJson);
+      })
+      .catch(err => {
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [setData, setLoading, setError]);
+
+  useEffect(() => {
+    getPictureOfTheDay(date);
+  }, [getPictureOfTheDay, date]);
+
+  const handlePreviousDay = () => {
+    const currentDate = new Date(date);
+    currentDate.setDate(currentDate.getDate() - 1);
+    setDate(currentDate.toISOString().split('T')[0]);
+  };
+
+  const handleNextDay = () => {
+    const currentDate = new Date(date);
+    currentDate.setDate(currentDate.getDate() + 1);
+    setDate(currentDate.toISOString().split('T')[0]);
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handlePreviousDay}>Previous</button>
+        <button onClick={handleNextDay}>Next</button>
+      </div>
+      {loading ? <Loading /> : null}
+      {error ? <p>Error: {error.message}</p> : null}
+      {data ? <ImageCard {...data} /> : null}
+    </div>
+  );
+}
+
+export default App;
