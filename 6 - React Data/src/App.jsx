@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 const ImageCard = ({ title, url, explanation, date }) => {
@@ -14,7 +14,33 @@ const ImageCard = ({ title, url, explanation, date }) => {
 
 
 function App() {
-  const NewsCard = ({}) => {
+  const [data, setData] = useState(null);
+  const [newsData, setNewsData] = useState(null);
+  const [search, setSearch] = useState('');
+  const [date, setDateHook] = useState('');
+  const searchKeyWord = search;
+
+  const resetData = () => {
+    setData(null);
+  }
+
+  const getNextDay = () => {
+    const day = new Date(date);
+    day.setDate(day.getDate() + 1);
+
+    const formattedDate = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
+    setDateHook(formattedDate);
+  }
+
+  const getPreviousDay = () => {
+    const day = new Date(date);
+    day.setDate(day.getDate() - 1);
+
+    const formattedDate = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
+    setDateHook(formattedDate);
+  }
+
+  const NewsCard = ({ }) => {
     return (
       <div>
         {newsData.map((article) => (
@@ -28,11 +54,6 @@ function App() {
       </div>
     )
   }
-  const [data, setData] = useState(null);
-  const [newsData, setNewsData] = useState(null);
-  const [search, setSearch] = useState('');
-  const [date, setDate] = useState('');
-  const searchKeyWord = search;
 
   const seeThePicture = () => {
     const fetchString = 'https://api.nasa.gov/planetary/apod/?api_key='
@@ -66,14 +87,19 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div className='newsSearch'>
         <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
         <button onClick={getNews} >Search</button>
       </div>
 
       <div>
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <button onClick={seeThePicture}>See the picture</button>
+        <input type="date" value={date} onChange={(e) => setDateHook(e.target.value)} />
+        <div>
+          <button onClick={getPreviousDay}>&#8592;</button>
+          <button onClick={seeThePicture}>See the picture</button>
+          <button onClick={resetData}>Reset</button>
+          <button onClick={getNextDay}>&#8594;</button>
+        </div>
       </div>
 
 
@@ -91,7 +117,7 @@ function App() {
       )}
 
       {newsData ? (
-        <NewsCard newsData={newsData}/>
+        <NewsCard newsData={newsData} />
       ) : (
         <p>Loading...</p>
       )
