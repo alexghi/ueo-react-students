@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Link, Outlet, useLocation,Navigate } from "react-router-dom";
+import Login from "./LoginPage";
+import Dashboard from "./DashboardPage";
+import Home from "./HomePage"
+import "./App.css";
 
+import DashboardRoutes from "./DashboardPage";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard/*" element={<DashboardRoutes />} />
+        </Route>
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+function Layout() {
+  let location = useLocation();
+  const activeCls = "currently-active";
+
+  return (
+    <div>
+      <nav>
+        <ul className="navbaritems d-flex justify-content-between">
+        <li
+            className={`${location.pathname === "/" ? activeCls : ""}`}
+          >
+            <Link to="/"> Home </Link>
+          </li>
+          <li className={`${location.pathname === "/login" ? activeCls : ""}`}>
+            <Link to="/login"> Login </Link>
+          </li>
+          <li
+            className={`${location.pathname === "/dashboard" ? activeCls : ""}`}
+          >
+            <Link to="/dashboard"> Dashboard </Link>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
+    </div>
+  );
+}
+export default App;
