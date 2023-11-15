@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import Login from './components/Login'
-import Dashboard from './components/Dashboard'
+import Login from './LoginPage'
+import Dashboard from './DashboardPage'
 
 function App() {
   return (
