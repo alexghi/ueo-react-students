@@ -14,7 +14,7 @@ function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path="/" element={<Layout />}> {/* componentele comune se pun in layout, de ex footer */}
                     <Route index element={<About />} />
                     <Route path="/resume" element={<Resume />} />
                     <Route path="/projects" element={<Projects />}>
@@ -25,7 +25,7 @@ function App() {
         </div>
     );
 }
-
+//Tot ce e in Layout o sa apara pe toate paginile
 function Layout() {
     let location = useLocation();
     const activeCls = "currently-active";
@@ -52,6 +52,7 @@ function Layout() {
     );
 }
 
+//Ori din App.jsx ...
 // function _App() {
 //   const router = createBrowserRouter([
 //     {

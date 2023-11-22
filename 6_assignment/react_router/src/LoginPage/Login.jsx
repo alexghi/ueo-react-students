@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Login({ onLogin }) {
+const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // TODO: Add validation logic here
-    onLogin(username);
+    navigate('/dashboard');
   };
 
   return (
@@ -26,5 +27,6 @@ function Login({ onLogin }) {
     </form>
   );
 }
+
 
 export default Login;

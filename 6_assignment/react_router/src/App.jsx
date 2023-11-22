@@ -1,33 +1,17 @@
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Login from './LoginPage'
 import Dashboard from './DashboardPage'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <Redirect to="/login" />
-      </Switch>
-    </BrowserRouter>
-  )
-}
-
-function PrivateRoute({ component: Component, ...rest }) {
-  const isAuthenticated = localStorage.getItem('isAuthenticated')
-
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-        )
-      }
-    />
+    <div>
+      <Routes>
+        <Route path="/" element={<Login />}>
+          
+          <Route path="/dashboard" element={<Dashboard/>} />
+        </Route>
+    </Routes>
+    </div>
   )
 }
 
