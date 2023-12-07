@@ -5,7 +5,7 @@ function Landing() {
     const navigate = useNavigate();
     return (
         <div>
-            <h1>Helcome aboard</h1>
+            <h1>Welcome aboard</h1>
             <button onClick={() => navigate("/login", {replace: true,})}>Go to Login</button>
         </div>
     );
