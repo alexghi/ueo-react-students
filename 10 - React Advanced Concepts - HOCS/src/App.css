@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.article {
+  box-shadow: 1px 1px 1px #92e8ca;
+  border: 1px solid #94e2d2;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 20px;
+}
+
+:root {
+  --offset: 187;
+  --duration: 1.4s;
+}
+
+
+svg {
+  stroke: aliceblue;
+  animation: rotator var(--duration) linear infinite;
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+circle {
+  stroke-dasharray: var(--offset);
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: dash var(--duration) ease-in-out infinite,
+    colors (var(--duration) * 4) ease-in-out infinite;
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285f4;
+  }
+  25% {
+    stroke: #de3e35;
+  }
+  50% {
+    stroke: #f7c223;
+  }
+  75% {
+    stroke: #1b9a59;
+  }
+  100% {
+    stroke: #4285f4;
+  }
+}
+
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: var(--offset);
+  }
+  50% {
+    stroke-dashoffset: var(--offset)/4;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: var(--offset);
+    transform: rotate(450deg);
+  }
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #db6c34; /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+}
+
+.loader-hide {
+  display: none;
+}
+
+.loader-show {
+  display: block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.myCustomBtn {
+  background-color: blanchedalmond;
+  border: 1px solid #ede;
+  border-radius: 5px;
+  box-shadow: 5px 3px #ede;
+  display: inline;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.myCustomBtn:hover {
+  box-shadow: 3px 0 0 #ede;
+}
