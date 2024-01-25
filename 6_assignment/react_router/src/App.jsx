@@ -9,7 +9,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Login/>} />
-          <Route path="/dashboard" element={<Dashboard/>}>
+          <Route path="/dashboard" >
+            <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/dashboard/settings" element={<Settings/>} />
         </Route>
       </Route>
